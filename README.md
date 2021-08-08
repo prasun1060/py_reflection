@@ -26,10 +26,9 @@ Email - bhattacharyyaprasun47@gmail.com
     
  2. Run the package (Run the commands below in terminal):
     ```
-    set FLASK_APP=py_reflection
-    set FLASK_ENV=development
-    pip install -e .
-    flask run
+    python
+    >>>from py_reflection import app
+    >>>app.run()
     ```
  
  Api Endpoint and their description:
