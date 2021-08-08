@@ -1,5 +1,6 @@
 # py_reflection
 
+```
 
 ██████╗░██╗░░░██╗██████╗░███████╗███████╗██╗░░░░░███████╗░█████╗░████████╗██╗░█████╗░███╗░░██╗
 ██╔══██╗╚██╗░██╔╝██╔══██╗██╔════╝██╔════╝██║░░░░░██╔════╝██╔══██╗╚══██╔══╝██║██╔══██╗████╗░██║
@@ -7,6 +8,7 @@
 ██╔═══╝░░░╚██╔╝░░██╔══██╗██╔══╝░░██╔══╝░░██║░░░░░██╔══╝░░██║░░██╗░░░██║░░░██║██║░░██║██║╚████║
 ██║░░░░░░░░██║░░░██║░░██║███████╗██║░░░░░███████╗███████╗╚█████╔╝░░░██║░░░██║╚█████╔╝██║░╚███║
 ╚═╝░░░░░░░░╚═╝░░░╚═╝░░╚═╝╚══════╝╚═╝░░░░░╚══════╝╚══════╝░╚════╝░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝
+```
 
 Developed by - Prasun Bhattacharyya
 Email - bhattacharyyaprasun47@gmail.com
@@ -18,15 +20,17 @@ Email - bhattacharyyaprasun47@gmail.com
  How to start:
  
  1. Install the package via pip:
-    
+    ```
     py -m pip install py_reflection
+    ```
     
  2. Run the package (Run the commands below in terminal):
-    
+    ```
     set FLASK_APP=py_reflection
     set FLASK_ENV=development
     pip install -e .
     flask run
+    ```
  
  Api Endpoint and their description:
  ** All of the endpoints have a common parameter view_idx(integer, optional). Use this parameter to toggle between session in emulator.
