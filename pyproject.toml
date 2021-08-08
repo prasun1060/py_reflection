@@ -1,0 +1,10 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+    "flask==2.0.1",
+    "comtypes==1.1.7",
+    "pywin32==300",
+    "pywinauto==0.6.8"
+]
+build-backend = "setuptools.build_meta"

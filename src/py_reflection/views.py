@@ -1,28 +1,10 @@
-# PyReflection 1.0
-
-from flask import Flask, json, jsonify, request
+from . import app, CONTROL_KEYS
 import win32com.client as wc
 from pywinauto.application import Application as pw
-import os
+from flask import jsonify, request
 
 
-app = Flask(__name__)
-
-CONTROL_KEYS = {
-    'F1': 10,
-    'F2': 11,
-    'F3': 12,
-    'F4': 13,
-    'F5': 14,
-    'F6': 15,
-    'F7': 16,
-    'F8': 17,
-    'F9': 18,
-    'F10': 19,
-    'F11': 20,
-}
-
-def connect_refection(view_idx:int=1) -> object:
+def connect_refection(view_idx: int = 1) -> object:
     try:
         wgs = wc.GetObject('Reflection Workspace')
         wgs_screen = wgs.GetObject('Frame').view(view_idx).Control.Screen
@@ -30,6 +12,7 @@ def connect_refection(view_idx:int=1) -> object:
         print('Unexpected error occured!, Please check if reflection desktop is open.')
     else:
         return wgs_screen
+
 
 @app.route('/connect')
 def connect():
@@ -48,6 +31,7 @@ def connect():
                 'response': 'Reflection Workspace successfully connected.',
                 'error': False
             })
+
 
 @app.route('/send_keys', methods=['GET', 'POST'])
 def send_keys():
@@ -91,6 +75,7 @@ def send_keys():
                 'error': False
             })
 
+
 @app.route('/press_enter', methods=['GET', 'POST'])
 def press_enter():
     view_idx = request.args.get('view_idx')
@@ -117,6 +102,7 @@ def press_enter():
             'response': 'Enter pressed successfully',
             'error': False
         })
+
 
 @app.route('/press_key', methods=['GET', 'POST'])
 def press_key():
@@ -146,6 +132,7 @@ def press_key():
             'error': False
         })
 
+
 @app.route('/press_control_keys', methods=['GET', 'POST'])
 def press_control_keys():
     view_idx = request.args.get('view_idx')
@@ -173,6 +160,7 @@ def press_control_keys():
             'response': 'Key pressed successfully',
             'error': False
         })
+
 
 @app.route('/get_text', methods=['GET', 'POST'])
 def get_text():
@@ -211,6 +199,7 @@ def get_text():
                 'error': False
             })
 
+
 @app.route('/get_text_coordinates', methods=['GET', 'POST'])
 def get_text_coordinates():
     view_idx = request.args.get('view_idx')
@@ -235,12 +224,13 @@ def get_text_coordinates():
         if line.find(text) != -1:
             return jsonify({
                 'error': False,
-                'response': {'x': row_no, 'y': line.find(text)+1}
+                'response': {'x': row_no, 'y': line.find(text) + 1}
             })
     return jsonify({
         'error': False,
         'response': {'x': 0, 'y': 0}
     })
+
 
 @app.route('/check_text_present', methods=['GET', 'POST'])
 def check_text_present():
@@ -272,6 +262,7 @@ def check_text_present():
         'error': False,
         'response': False
     })
+
 
 @app.route('/move_cursor', methods=['GET', 'POST'])
 def move_cursor():
@@ -309,6 +300,7 @@ def move_cursor():
                 'error': False
             })
 
+
 @app.route('/get_view_count', methods=['GET', 'POST'])
 def get_view_count():
     try:
@@ -325,15 +317,3 @@ def get_view_count():
             'response': output,
             'error': False
         })
-
-if __name__ == '__main__':
-
-    if os.path.exists('LICENSE.txt'):
-        with open('LICENSE.txt') as f:
-            license_txt = f.read()
-        if license_txt.find('Copyright (c) 2021 Prasun Bhattacharyya') != -1:
-            app.run(port=4200, debug=False)
-        else:
-            print('LICENSE.txt file missing! Please get the original License Key.')
-    else:
-        print('LICENSE.txt file missing! Please get the original License Key.')
